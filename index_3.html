@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Comptoir Vert — Parapharmacie en ligne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F2F5F0;
+    --surface: #FFFFFF;
+    --ink: #16241C;
+    --ink-soft: #46564C;
+    --teal: #1F4B43;
+    --teal-dark: #142F2A;
+    --sage: #8FAE95;
+    --sage-pale: #DCE7DD;
+    --line: #D7E1D6;
+    --accent: #C1443C;
+    --amber: #E3A857;
+    --radius: 3px;
+    --shadow: 0 1px 2px rgba(20,36,30,0.06), 0 8px 24px rgba(20,36,30,0.06);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3{
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    margin: 0;
+    color: var(--teal-dark);
+    letter-spacing: -0.01em;
+  }
+
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+  a{ color: inherit; }
+  button{ font-family: inherit; cursor:pointer; }
+  input, select{ font-family: inherit; }
+  :focus-visible{ outline: 2px solid var(--teal); outline-offset: 2px; }
+  img,svg{ display:block; max-width:100%; }
+
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Header ---------- */
+  header.site{
+    position: sticky; top:0; z-index: 40;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 24px; gap: 20px; max-width: 1180px; margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand-mark{ width:34px; height:34px; flex-shrink:0; }
+  .brand-name{ font-family:'Fraunces', serif; font-size: 1.28rem; font-weight:600; color:var(--teal-dark); line-height:1; }
+  .brand-tag{ font-family:'IBM Plex Mono', monospace; font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; color: var(--sage); display:block; margin-top:3px; }
+
+  nav.primary{ display:flex; gap:22px; }
+  nav.primary a{
+    text-decoration:none; font-size:0.88rem; font-weight:500; color: var(--ink-soft);
+    padding: 6px 2px; border-bottom: 1px solid transparent;
+  }
+  nav.primary a:hover{ color: var(--teal-dark); border-color: var(--sage); }
+
+  .header-actions{ display:flex; align-items:center; gap:14px; }
+  .search-box{
+    display:flex; align-items:center; gap:8px;
+    background: var(--surface); border:1px solid var(--line); border-radius: var(--radius);
+    padding: 7px 12px; min-width: 200px;
+  }
+  .search-box input{
+    border:none; outline:none; background:transparent; font-size:0.86rem; width:100%; color:var(--ink);
+  }
+  .search-box svg{ flex-shrink:0; opacity:0.55; }
+
+  .cart-btn{
+    position:relative; display:flex; align-items:center; gap:8px;
+    background: var(--teal); color: #fff; border:none; border-radius: var(--radius);
+    padding: 9px 14px; font-size:0.84rem; font-weight:600;
+  }
+  .cart-btn:hover{ background: var(--teal-dark); }
+  .cart-count{
+    background: var(--accent); color:#fff; border-radius:50%; min-width:18px; height:18px;
+    display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700;
+    font-family:'IBM Plex Mono',monospace; padding: 0 3px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 68px 24px 48px; }
+  .hero-inner{
+    max-width:1180px; margin:0 auto; display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase;
+    color: var(--accent); display:flex; align-items:center; gap:8px; margin-bottom: 18px;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background: var(--accent); display:inline-block; }
+  .hero h1{ font-size: clamp(2.1rem, 4vw, 3.1rem); line-height:1.08; margin-bottom:20px; }
+  .hero h1 em{ font-style: italic; color: var(--teal); }
+  .hero p.lead{ font-size:1.05rem; color: var(--ink-soft); max-width: 46ch; line-height:1.6; margin-bottom: 28px; }
+  .hero-ctas{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .btn-primary{
+    background: var(--teal); color:#fff; border:none; padding: 13px 24px; border-radius: var(--radius);
+    font-size:0.92rem; font-weight:600; text-decoration:none; display:inline-block;
+  }
+  .btn-primary:hover{ background: var(--teal-dark); }
+  .btn-ghost{
+    background:transparent; border:1px solid var(--line); color: var(--ink); padding:12px 22px; border-radius: var(--radius);
+    font-size:0.92rem; font-weight:500; text-decoration:none; display:inline-block;
+  }
+  .btn-ghost:hover{ border-color: var(--teal); }
+
+  .stat-row{ display:flex; gap: 34px; margin-top: 40px; flex-wrap:wrap; }
+  .stat{ }
+  .stat .num{ font-family:'Fraunces',serif; font-size:1.5rem; color: var(--teal-dark); font-weight:600; }
+  .stat .label{ font-size:0.76rem; color: var(--ink-soft); margin-top:2px; }
+
+  .hero-art{ position:relative; display:flex; justify-content:center; }
+  .label-card{
+    background: var(--surface); border:1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 28px 26px 22px; width: 100%; max-width: 320px;
+    position:relative;
+  }
+  .label-card .perforation{
+    position:absolute; top:-1px; left:0; right:0; height:10px; overflow:hidden;
+  }
+  .label-card .perforation svg{ width:100%; height:20px; }
+  .label-card .eyebrow-mini{ font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--sage); margin-bottom:10px; }
+  .label-card h3{ font-size:1.2rem; margin-bottom:6px; }
+  .label-card .rx-lines{ margin-top:16px; display:flex; flex-direction:column; gap:8px; }
+  .label-card .rx-line{ display:flex; justify-content:space-between; font-size:0.78rem; color: var(--ink-soft); border-bottom:1px dashed var(--line); padding-bottom:6px; }
+  .label-card .rx-line b{ color: var(--ink); font-weight:600; }
+
+  /* ---------- Aisle strip ---------- */
+  .aisles{ padding: 8px 24px 36px; }
+  .aisle-row{ display:flex; gap:12px; overflow-x:auto; padding-bottom: 6px; max-width:1180px; margin:0 auto; }
+  .aisle-chip{
+    flex-shrink:0; background: var(--surface); border:1px solid var(--line); border-radius: 999px;
+    padding: 10px 18px; font-size:0.84rem; font-weight:500; color: var(--ink-soft);
+    display:flex; align-items:center; gap:8px; white-space:nowrap;
+  }
+  .aisle-chip:hover{ border-color: var(--sage); color: var(--ink); }
+  .aisle-chip.active{ background: var(--teal); border-color:var(--teal); color:#fff; }
+  .aisle-chip .dot{ width:7px; height:7px; border-radius:50%; background: var(--sage); }
+  .aisle-chip.active .dot{ background: #fff; }
+
+  /* ---------- Shop ---------- */
+  section.shop{ padding: 12px 24px 80px; }
+  .shop-inner{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns: 220px 1fr; gap: 40px; align-items:start; }
+
+  .filters{ position:sticky; top: 90px; }
+  .filters h4{ font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color: var(--ink-soft); margin-bottom:14px; }
+  .filter-group{ margin-bottom: 28px; }
+  .filter-option{ display:flex; align-items:center; gap:9px; padding:6px 0; font-size:0.86rem; color: var(--ink-soft); cursor:pointer; }
+  .filter-option:hover{ color: var(--ink); }
+  .filter-option input{ accent-color: var(--teal); }
+  .filter-option.active-radio{ color: var(--teal-dark); font-weight:600; }
+
+  .shop-toolbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 22px; flex-wrap:wrap; gap:12px; }
+  .result-count{ font-size:0.84rem; color: var(--ink-soft); }
+  .sort-select{
+    border:1px solid var(--line); background: var(--surface); border-radius: var(--radius);
+    padding: 8px 10px; font-size:0.82rem; color: var(--ink);
+  }
+
+  .grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+  .card{
+    background: var(--surface); border:1px solid var(--line); border-radius: var(--radius);
+    position:relative; overflow:hidden; display:flex; flex-direction:column;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .card:hover{ border-color: var(--sage); transform: translateY(-2px); }
+  .card .tear{ height:9px; }
+  .card .tear svg{ width:100%; height:100%; display:block; }
+  .card .art{
+    height: 140px; display:flex; align-items:center; justify-content:center;
+    background: var(--sage-pale); position:relative;
+  }
+  .card .tag{
+    position:absolute; top:10px; left:10px; background: var(--accent); color:#fff;
+    font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.04em; text-transform:uppercase;
+    padding: 3px 8px; border-radius: 2px;
+  }
+  .card .tag.alt{ background: var(--amber); color: var(--teal-dark); }
+  .card .body{ padding: 16px 16px 18px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .card .brand{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color: var(--sage); }
+  .card .name{ font-family:'Fraunces',serif; font-size:1.02rem; font-weight:500; color: var(--teal-dark); line-height:1.25; }
+  .card .format{ font-size:0.78rem; color: var(--ink-soft); }
+  .card .bottom-row{ margin-top:10px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .card .price{ font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:0.98rem; color: var(--ink); }
+  .card .price .cur{ font-size:0.68rem; color: var(--ink-soft); margin-left:2px; }
+  .add-btn{
+    background: var(--teal-dark); color:#fff; border:none; border-radius: var(--radius);
+    padding: 8px 13px; font-size:0.78rem; font-weight:600; white-space:nowrap;
+  }
+  .add-btn:hover{ background: var(--teal); }
+  .add-btn.added{ background: var(--sage); }
+
+  .empty-state{ text-align:center; padding: 60px 20px; color: var(--ink-soft); grid-column: 1/-1; }
+
+  /* ---------- Trust band ---------- */
+  .trust{ background: var(--teal-dark); padding: 44px 24px; }
+  .trust-inner{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+  .trust-item{ display:flex; gap:12px; align-items:flex-start; }
+  .trust-item svg{ flex-shrink:0; color: var(--amber); }
+  .trust-item h5{ color:#fff; font-family:'Inter',sans-serif; font-size:0.88rem; font-weight:600; margin-bottom:4px; }
+  .trust-item p{ color: #B9C9C2; font-size:0.78rem; margin:0; line-height:1.5; }
+
+  /* ---------- Footer ---------- */
+  footer{ background: var(--teal-dark); padding: 50px 24px 26px; border-top:1px solid rgba(255,255,255,0.08); }
+  .footer-inner{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns: 1.4fr 1fr 1fr 1.1fr; gap: 36px; }
+  footer h3{ color:#fff; font-size:1.1rem; }
+  footer .blurb{ color:#B9C9C2; font-size:0.84rem; line-height:1.6; margin-top:10px; max-width: 32ch; }
+  footer h6{ color:#fff; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px; }
+  footer ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  footer ul a{ color:#B9C9C2; text-decoration:none; font-size:0.84rem; }
+  footer ul a:hover{ color:#fff; }
+  .wa-btn{
+    display:inline-flex; align-items:center; gap:8px; background: #2CA05A; color:#fff; text-decoration:none;
+    padding: 10px 16px; border-radius: var(--radius); font-size:0.84rem; font-weight:600; margin-top:6px;
+  }
+  .footer-bottom{ max-width:1180px; margin: 40px auto 0; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08);
+    display:flex; justify-content:space-between; color:#7E9089; font-size:0.74rem; flex-wrap:wrap; gap:8px; }
+
+  /* ---------- Cart drawer ---------- */
+  .overlay{
+    position:fixed; inset:0; background: rgba(20,36,30,0.4); z-index:50; opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .overlay.open{ opacity:1; pointer-events:auto; }
+  .cart-drawer{
+    position:fixed; top:0; right:0; height:100%; width: 100%; max-width: 400px; background: var(--bg); z-index:60;
+    transform: translateX(100%); transition: transform .25s ease; display:flex; flex-direction:column;
+    box-shadow: -6px 0 30px rgba(0,0,0,0.15);
+  }
+  .cart-drawer.open{ transform: translateX(0); }
+  .cart-head{ padding: 20px 22px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; background:var(--surface); }
+  .cart-head h3{ font-size:1.15rem; }
+  .close-btn{ background:none; border:none; padding:4px; color: var(--ink-soft); }
+  .close-btn:hover{ color: var(--ink); }
+
+  .receipt-edge{ height:10px; }
+  .receipt-edge svg{ width:100%; height:100%; }
+
+  .cart-items{ flex:1; overflow-y:auto; padding: 8px 22px; }
+  .cart-item{ display:flex; gap:12px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+  .cart-item .mini-art{ width:52px; height:52px; background: var(--sage-pale); border-radius: var(--radius); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .cart-item .info{ flex:1; min-width:0; }
+  .cart-item .brand{ font-family:'IBM Plex Mono',monospace; font-size:0.62rem; text-transform:uppercase; color:var(--sage); }
+  .cart-item .name{ font-size:0.88rem; font-weight:600; color: var(--ink); line-height:1.3; margin: 2px 0 6px; }
+  .qty-row{ display:flex; align-items:center; gap:10px; }
+  .qty-btn{ width:22px; height:22px; border:1px solid var(--line); background:var(--surface); border-radius:2px; font-size:0.85rem; line-height:1; display:flex; align-items:center; justify-content:center; color: var(--ink); }
+  .qty-btn:hover{ border-color: var(--teal); }
+  .qty-val{ font-family:'IBM Plex Mono',monospace; font-size:0.82rem; min-width:14px; text-align:center; }
+  .cart-item .line-price{ font-family:'IBM Plex Mono',monospace; font-size:0.86rem; font-weight:600; white-space:nowrap; }
+  .remove-x{ background:none; border:none; color: var(--ink-soft); font-size:0.72rem; text-decoration:underline; padding:0; margin-top:6px; }
+  .remove-x:hover{ color: var(--accent); }
+
+  .cart-empty{ padding: 60px 10px; text-align:center; color: var(--ink-soft); font-size:0.9rem; }
+
+  .cart-foot{ border-top:1px solid var(--line); background: var(--surface); padding: 18px 22px 22px; }
+  .ship-note{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color: var(--ink-soft); background: var(--sage-pale); padding:8px 10px; border-radius:2px; margin-bottom:14px; }
+  .totals-row{ display:flex; justify-content:space-between; font-size:0.86rem; color: var(--ink-soft); padding: 4px 0; }
+  .totals-row.total{ color: var(--ink); font-weight:700; font-size:1.02rem; border-top:1px dashed var(--line); margin-top:8px; padding-top:12px; }
+  .totals-row .val{ font-family:'IBM Plex Mono',monospace; }
+  .checkout-btn{
+    width:100%; background: var(--accent); color:#fff; border:none; padding:14px; border-radius: var(--radius);
+    font-size:0.92rem; font-weight:700; margin-top:14px; display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .checkout-btn:hover{ background:#a3372f; }
+  .checkout-note{ text-align:center; font-size:0.72rem; color: var(--ink-soft); margin-top:10px; }
+
+  @media (max-width: 900px){
+    .hero-inner{ grid-template-columns: 1fr; }
+    .hero-art{ order:-1; }
+    .shop-inner{ grid-template-columns: 1fr; }
+    .filters{ position:static; display:flex; gap:24px; overflow-x:auto; padding-bottom:10px; }
+    .filter-group{ margin-bottom:0; min-width:150px; }
+    .grid{ grid-template-columns: repeat(2,1fr); }
+    .trust-inner{ grid-template-columns: repeat(2,1fr); }
+    .footer-inner{ grid-template-columns: 1fr 1fr; }
+    nav.primary{ display:none; }
+  }
+  @media (max-width: 560px){
+    .grid{ grid-template-columns: 1fr 1fr; }
+    .search-box{ display:none; }
+    .stat-row{ gap:20px; }
+    .footer-inner{ grid-template-columns: 1fr; }
+    .cart-drawer{ max-width:100%; }
+  }
+
+  /* ---------- Checkout ---------- */
+  .checkout-btn.secondary-link{
+    background:none; color: var(--ink-soft); font-weight:500; text-decoration:underline; padding: 8px; margin-top: 2px;
+  }
+  .checkout-btn.secondary-link:hover{ color: var(--ink); }
+
+  .co-overlay{
+    position:fixed; inset:0; background: rgba(20,36,30,0.45); z-index:70; opacity:0; pointer-events:none; transition:opacity .2s ease;
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .co-overlay.open{ opacity:1; pointer-events:auto; }
+  .co-modal{
+    background: var(--bg); width:100%; max-width: 560px; max-height: 90vh; overflow-y:auto;
+    border-radius: var(--radius); box-shadow: var(--shadow); transform: translateY(14px); opacity:0; transition: transform .2s ease, opacity .2s ease;
+  }
+  .co-overlay.open .co-modal{ transform: translateY(0); opacity:1; }
+
+  .co-head{ display:flex; justify-content:space-between; align-items:center; padding: 22px 24px 0; }
+  .co-head h3{ font-size:1.25rem; }
+
+  .co-steps{ display:flex; gap:0; padding: 18px 24px 0; }
+  .co-step{
+    flex:1; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.05em; text-transform:uppercase;
+    color: var(--ink-soft); padding-bottom:10px; border-bottom: 2px solid var(--line); text-align:center;
+  }
+  .co-step.active{ color: var(--teal-dark); border-color: var(--teal); font-weight:600; }
+  .co-step.done{ color: var(--sage); border-color: var(--sage); }
+
+  .co-body{ padding: 24px; }
+  .co-panel{ display:none; }
+  .co-panel.active{ display:block; }
+
+  .co-field{ margin-bottom:16px; }
+  .co-field label{ display:block; font-size:0.78rem; font-weight:600; color: var(--ink-soft); margin-bottom:6px; }
+  .co-field input, .co-field select{
+    width:100%; border:1px solid var(--line); background: var(--surface); border-radius: var(--radius);
+    padding: 11px 12px; font-size:0.9rem; color: var(--ink);
+  }
+  .co-field input:focus, .co-field select:focus{ border-color: var(--teal); }
+  .co-row-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+  .co-error{ font-size:0.75rem; color: var(--accent); margin-top:5px; display:none; }
+  .co-field.invalid input{ border-color: var(--accent); }
+  .co-field.invalid .co-error{ display:block; }
+
+  .pay-methods{ display:flex; flex-direction:column; gap:10px; margin-bottom:22px; }
+  .pay-method{
+    display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius: var(--radius);
+    padding: 13px 14px; cursor:pointer; background: var(--surface);
+  }
+  .pay-method:hover{ border-color: var(--sage); }
+  .pay-method.selected{ border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal); }
+  .pay-method input{ accent-color: var(--teal); }
+  .pay-method .pm-icon{ width:34px; height:24px; border-radius:2px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'IBM Plex Mono',monospace; font-size:0.6rem; font-weight:700; color:#fff; }
+  .pay-method .pm-text{ flex:1; }
+  .pay-method .pm-title{ font-size:0.86rem; font-weight:600; color: var(--ink); }
+  .pay-method .pm-sub{ font-size:0.74rem; color: var(--ink-soft); margin-top:1px; }
+
+  .pay-panel{
+    background: var(--surface); border:1px solid var(--line); border-radius: var(--radius); padding:18px; margin-bottom:20px;
+  }
+  .pay-panel h5{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color: var(--ink-soft); margin: 0 0 14px; }
+  .card-visual{
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal)); border-radius:8px; padding:16px 18px; color:#fff;
+    margin-bottom:16px; font-family:'IBM Plex Mono',monospace;
+  }
+  .card-visual .cv-number{ font-size:1.05rem; letter-spacing:0.12em; margin: 18px 0 14px; min-height:1.3em; }
+  .card-visual .cv-bottom{ display:flex; justify-content:space-between; font-size:0.68rem; opacity:0.85; }
+  .rib-box{ display:flex; flex-direction:column; gap:8px; }
+  .rib-row{ display:flex; justify-content:space-between; font-size:0.84rem; padding: 8px 0; border-bottom:1px dashed var(--line); }
+  .rib-row b{ font-family:'IBM Plex Mono',monospace; }
+  .wallet-btn{
+    width:100%; border:none; border-radius: var(--radius); padding:13px; font-weight:700; font-size:0.9rem; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+
+  .co-summary{ background: var(--surface); border:1px solid var(--line); border-radius: var(--radius); padding:16px 18px; margin-bottom:20px; }
+  .co-summary .cs-row{ display:flex; justify-content:space-between; font-size:0.82rem; color: var(--ink-soft); padding:5px 0; }
+  .co-summary .cs-row.total{ color: var(--ink); font-weight:700; border-top:1px dashed var(--line); margin-top:6px; padding-top:10px; font-size:0.94rem; }
+  .co-summary .cs-row .val{ font-family:'IBM Plex Mono',monospace; }
+
+  .co-nav{ display:flex; justify-content:space-between; gap:12px; padding: 0 24px 24px; }
+  .co-nav button{ flex:1; padding:13px; border-radius: var(--radius); font-size:0.88rem; font-weight:600; }
+  .co-back{ background:none; border:1px solid var(--line); color: var(--ink); }
+  .co-back:hover{ border-color: var(--teal); }
+  .co-next{ background: var(--teal); border:none; color:#fff; }
+  .co-next:hover{ background: var(--teal-dark); }
+  .co-next:disabled{ opacity:0.5; cursor:not-allowed; }
+  .co-next.spinning{ display:flex; align-items:center; justify-content:center; gap:8px; }
+  .spinner{ width:14px; height:14px; border:2px solid rgba(255,255,255,0.4); border-top-color:#fff; border-radius:50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  .co-success{ text-align:center; padding: 10px 8px 6px; }
+  .co-success .check-badge{
+    width:60px; height:60px; border-radius:50%; background: var(--sage-pale); display:flex; align-items:center; justify-content:center;
+    margin: 0 auto 18px; color: var(--teal);
+  }
+  .co-success h4{ font-family:'Fraunces',serif; font-size:1.3rem; color: var(--teal-dark); margin-bottom:8px; }
+  .co-success p{ font-size:0.86rem; color: var(--ink-soft); max-width:36ch; margin: 0 auto 18px; line-height:1.55; }
+  .order-id{ font-family:'IBM Plex Mono',monospace; background: var(--sage-pale); display:inline-block; padding:8px 16px; border-radius:2px; font-weight:600; letter-spacing:0.04em; margin-bottom: 18px; }
+  .demo-note{ font-size:0.7rem; color: var(--ink-soft); background: #FBF3E6; border:1px solid #F0DCB4; padding:10px 12px; border-radius:2px; margin-top:4px; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+        <rect x="6" y="10" width="28" height="24" rx="2" fill="#1F4B43"/>
+        <rect x="14" y="4" width="12" height="8" rx="1.5" fill="#1F4B43"/>
+        <path d="M20 16v14M13 23h14" stroke="#DCE7DD" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand-name">Le Comptoir Vert</span>
+        <span class="brand-tag">Parapharmacie · Tunis</span>
+      </span>
+    </a>
+    <nav class="primary">
+      <a href="#visage">Visage</a>
+      <a href="#corps">Corps</a>
+      <a href="#cheveux">Cheveux</a>
+      <a href="#maman-bebe">Maman &amp; Bébé</a>
+      <a href="#solaire">Solaire</a>
+      <a href="#complements">Compléments</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="searchInput" type="text" placeholder="Chercher un soin, une marque…" aria-label="Rechercher un produit">
+      </div>
+      <button class="cart-btn" id="cartOpenBtn" aria-haspopup="dialog">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        Panier
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Officine en ligne — livraison partout en Tunisie</div>
+        <h1>Les bons soins,<br>au bon moment, <em>conseillés</em>.</h1>
+        <p class="lead">Le Comptoir Vert réunit les marques dermo-cosmétiques et de parapharmacie que votre pharmacien recommande — sélectionnées, expliquées, livrées chez vous en 48h.</p>
+        <div class="hero-ctas">
+          <a href="#shop" class="btn-primary">Découvrir le catalogue</a>
+          <a href="#contact" class="btn-ghost">Une question ? Écrivez-nous</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="num">25+</div><div class="label">Marques référencées</div></div>
+          <div class="stat"><div class="num">48h</div><div class="label">Livraison Grand Tunis</div></div>
+          <div class="stat"><div class="num">100%</div><div class="label">Produits authentifiés</div></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="label-card">
+          <div class="perforation">
+            <svg viewBox="0 0 320 20" preserveAspectRatio="none"><path d="M0,20 Q8,4 16,20 T32,20 T48,20 T64,20 T80,20 T96,20 T112,20 T128,20 T144,20 T160,20 T176,20 T192,20 T208,20 T224,20 T240,20 T256,20 T272,20 T288,20 T304,20 T320,20 V0 H0 Z" fill="#F2F5F0"/></svg>
+          </div>
+          <div class="eyebrow-mini">Fiche conseil</div>
+          <h3>Routine anti-imperfections</h3>
+          <div class="rx-lines">
+            <div class="rx-line"><span>Matin</span><b>Nettoyant + SPF50</b></div>
+            <div class="rx-line"><span>Soir</span><b>Effaclar Duo+</b></div>
+            <div class="rx-line"><span>2×/semaine</span><b>Masque argile</b></div>
+            <div class="rx-line"><span>Durée</span><b>6 à 8 semaines</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="aisles">
+    <div class="aisle-row" id="aisleRow">
+      <button class="aisle-chip active" data-cat="all"><span class="dot"></span>Tous les rayons</button>
+      <button class="aisle-chip" data-cat="visage"><span class="dot"></span>Visage</button>
+      <button class="aisle-chip" data-cat="corps"><span class="dot"></span>Corps &amp; Bain</button>
+      <button class="aisle-chip" data-cat="cheveux"><span class="dot"></span>Cheveux</button>
+      <button class="aisle-chip" data-cat="maman-bebe"><span class="dot"></span>Maman &amp; Bébé</button>
+      <button class="aisle-chip" data-cat="solaire"><span class="dot"></span>Solaire</button>
+      <button class="aisle-chip" data-cat="complements"><span class="dot"></span>Compléments</button>
+      <button class="aisle-chip" data-cat="hygiene"><span class="dot"></span>Hygiène bucco-dentaire</button>
+    </div>
+  </section>
+
+  <section class="shop" id="shop">
+    <div class="shop-inner">
+      <aside class="filters">
+        <div class="filter-group">
+          <h4>Rayons</h4>
+          <div id="filterCats"></div>
+        </div>
+        <div class="filter-group">
+          <h4>Budget</h4>
+          <label class="filter-option"><input type="radio" name="price" value="all" checked> Tous les prix</label>
+          <label class="filter-option"><input type="radio" name="price" value="0-25"> Moins de 25 TND</label>
+          <label class="filter-option"><input type="radio" name="price" value="25-45"> 25 – 45 TND</label>
+          <label class="filter-option"><input type="radio" name="price" value="45-999"> Plus de 45 TND</label>
+        </div>
+      </aside>
+
+      <div>
+        <div class="shop-toolbar">
+          <div class="result-count" id="resultCount">25 produits</div>
+          <select class="sort-select" id="sortSelect">
+            <option value="relevance">Trier par pertinence</option>
+            <option value="price-asc">Prix croissant</option>
+            <option value="price-desc">Prix décroissant</option>
+            <option value="name-asc">Nom A–Z</option>
+          </select>
+        </div>
+        <div class="grid" id="productGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <div><h5>Livraison partout en Tunisie</h5><p>Grand Tunis sous 48h, régions sous 3 à 5 jours.</p></div>
+      </div>
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/></svg>
+        <div><h5>Paiement à la livraison</h5><p>Réglez en espèces à réception, sans frais cachés.</p></div>
+      </div>
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div><h5>Conseil de pharmacien</h5><p>Chaque fiche produit est relue par notre équipe officinale.</p></div>
+      </div>
+      <div class="trust-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <div><h5>Produits 100% authentifiés</h5><p>Achetés directement auprès des laboratoires distributeurs.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <h3>Le Comptoir Vert</h3>
+      <p class="blurb">Votre parapharmacie en ligne à Tunis : soins dermo-cosmétiques, hygiène et compléments, sélectionnés avec un pharmacien.</p>
+      <a class="wa-btn" href="https://wa.me/21694899247" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5.1-1.3A10 10 0 0 0 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z" opacity="0"/><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1s-.7.9-.9 1.1-.4.2-.7.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5s0-.4 0-.5c0-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3z"/></svg>
+        WhatsApp conseil
+      </a>
+    </div>
+    <div>
+      <h6>Rayons</h6>
+      <ul>
+        <li><a href="#visage">Visage</a></li>
+        <li><a href="#corps">Corps &amp; Bain</a></li>
+        <li><a href="#cheveux">Cheveux</a></li>
+        <li><a href="#maman-bebe">Maman &amp; Bébé</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Infos</h6>
+      <ul>
+        <li><a href="#">Livraison &amp; paiement</a></li>
+        <li><a href="#">Retours</a></li>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Conditions générales</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Contact</h6>
+      <ul>
+        <li>Avenue Habib Bourguiba, Tunis</li>
+        <li>+216 00 000 000</li>
+        <li>contact@comptoirvert.tn</li>
+        <li>Lun–Sam, 9h–19h</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Le Comptoir Vert — Parapharmacie en ligne.</span>
+    <span>Site vitrine de démonstration.</span>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Panier">
+  <div class="cart-head">
+    <h3>Votre panier</h3>
+    <button class="close-btn" id="cartCloseBtn" aria-label="Fermer le panier">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="receipt-edge">
+    <svg viewBox="0 0 320 10" preserveAspectRatio="none"><path d="M0,0 L8,10 L16,0 L24,10 L32,0 L40,10 L48,0 L56,10 L64,0 L72,10 L80,0 L88,10 L96,0 L104,10 L112,0 L120,10 L128,0 L136,10 L144,0 L152,10 L160,0 L168,10 L176,0 L184,10 L192,0 L200,10 L208,0 L216,10 L224,0 L232,10 L240,0 L248,10 L256,0 L264,10 L272,0 L280,10 L288,0 L296,10 L304,0 L312,10 L320,0 V0 H0 Z" fill="var(--surface)"/></svg>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot" id="cartFoot"></div>
+</aside>
+
+<div class="co-overlay" id="coOverlay">
+  <div class="co-modal" role="dialog" aria-label="Passer la commande">
+    <div class="co-head">
+      <h3 id="coTitle">Finaliser la commande</h3>
+      <button class="close-btn" id="coCloseBtn" aria-label="Fermer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="co-steps" id="coSteps">
+      <div class="co-step active" data-step="1">01 · Coordonnées</div>
+      <div class="co-step" data-step="2">02 · Confirmation</div>
+    </div>
+
+    <div class="co-body">
+
+      <!-- Step 1: coordonnées -->
+      <div class="co-panel active" data-panel="1">
+        <div class="co-field" id="fName">
+          <label for="coName">Nom complet</label>
+          <input type="text" id="coName" placeholder="Ex : Sarra Ben Ali">
+          <div class="co-error">Merci d'indiquer votre nom.</div>
+        </div>
+        <div class="co-row-2">
+          <div class="co-field" id="fPhone">
+            <label for="coPhone">Téléphone</label>
+            <input type="tel" id="coPhone" placeholder="XX XXX XXX">
+            <div class="co-error">Numéro de téléphone invalide.</div>
+          </div>
+          <div class="co-field" id="fCity">
+            <label for="coCity">Ville</label>
+            <input type="text" id="coCity" placeholder="Ex : Tunis">
+            <div class="co-error">Merci d'indiquer votre ville.</div>
+          </div>
+        </div>
+        <div class="co-field" id="fAddress">
+          <label for="coAddress">Adresse de livraison</label>
+          <input type="text" id="coAddress" placeholder="Rue, numéro, complément">
+          <div class="co-error">Merci d'indiquer une adresse.</div>
+        </div>
+        <div class="co-summary" id="coSummaryStep1"></div>
+        <div class="demo-note">La commande vous sera envoyée directement sur WhatsApp pour confirmation avec la pharmacie.</div>
+      </div>
+
+      <!-- Step 2: confirmation -->
+      <div class="co-panel" data-panel="2">
+        <div class="co-success" id="coSuccess"></div>
+      </div>
+
+    </div>
+
+    <div class="co-nav" id="coNav">
+      <button class="co-back" id="coBack" style="visibility:hidden;">Retour</button>
+      <button class="co-next" id="coNext">Continuer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const CATS = [
+    {slug:'visage', label:'Visage', shape:'jar'},
+    {slug:'corps', label:'Corps & Bain', shape:'bottle'},
+    {slug:'cheveux', label:'Cheveux', shape:'bottle-cap'},
+    {slug:'maman-bebe', label:'Maman & Bébé', shape:'tube'},
+    {slug:'solaire', label:'Solaire', shape:'bottle-pump'},
+    {slug:'complements', label:'Compléments alimentaires', shape:'jar-pills'},
+    {slug:'hygiene', label:'Hygiène bucco-dentaire', shape:'tube'}
+  ];
+
+  const PRODUCTS = [
+    {id:'v1', brand:'Avène', name:'Eau Thermale Spray', format:'300 ml', price:29.9, cat:'visage', tag:'Best-seller'},
+    {id:'v2', brand:'La Roche-Posay', name:'Effaclar Duo+', format:'40 ml', price:54.5, cat:'visage', tag:'Conseil pharmacien'},
+    {id:'v3', brand:'Bioderma', name:'Sensibio H2O', format:'500 ml', price:39.9, cat:'visage'},
+    {id:'v4', brand:'Vichy', name:'Minéral 89', format:'50 ml', price:62.0, cat:'visage', tag:'Nouveau'},
+    {id:'v5', brand:'Uriage', name:'Eau Thermale DS Crème', format:'40 ml', price:45.0, cat:'visage'},
+    {id:'v6', brand:'Nuxe', name:'Crème Prodigieuse Boost', format:'40 ml', price:68.0, cat:'visage'},
+    {id:'c1', brand:'A-Derma', name:'Exomega Baume Émollient', format:'200 ml', price:34.5, cat:'corps', tag:'Conseil pharmacien'},
+    {id:'c2', brand:'Uriage', name:'Xémose Crème Relipidante', format:'200 ml', price:38.0, cat:'corps'},
+    {id:'c3', brand:'Nuxe', name:'Huile Prodigieuse', format:'100 ml', price:59.9, cat:'corps', tag:'Best-seller'},
+    {id:'c4', brand:'Avène', name:'Cold Cream Pain Surgras', format:'100 g', price:18.5, cat:'corps'},
+    {id:'h1', brand:'Klorane', name:'Shampooing à la Camomille', format:'200 ml', price:24.9, cat:'cheveux'},
+    {id:'h2', brand:'Ducray', name:'Anaphase+ Shampooing', format:'400 ml', price:42.0, cat:'cheveux', tag:'Conseil pharmacien'},
+    {id:'h3', brand:'René Furterer', name:'Forticea Shampooing', format:'250 ml', price:46.5, cat:'cheveux'},
+    {id:'b1', brand:'Mustela', name:'Liniment Oléo-Calcaire', format:'400 ml', price:22.0, cat:'maman-bebe', tag:'Best-seller'},
+    {id:'b2', brand:'Mustela', name:'Crème de Change', format:'100 ml', price:19.5, cat:'maman-bebe'},
+    {id:'b3', brand:'Weleda', name:'Huile de Calendula', format:'200 ml', price:36.0, cat:'maman-bebe'},
+    {id:'b4', brand:'A-Derma', name:'Primalba Gel Lavant', format:'500 ml', price:27.0, cat:'maman-bebe'},
+    {id:'s1', brand:'Avène', name:'Crème Solaire SPF50+', format:'50 ml', price:41.5, cat:'solaire'},
+    {id:'s2', brand:'La Roche-Posay', name:'Anthelios SPF50+', format:'50 ml', price:49.9, cat:'solaire', tag:'Best-seller'},
+    {id:'s3', brand:'Uriage', name:'Bariésun SPF30 Spray', format:'200 ml', price:44.0, cat:'solaire'},
+    {id:'p1', brand:'Arkopharma', name:'Mélatonine Sommeil', format:'30 gél.', price:28.5, cat:'complements'},
+    {id:'p2', brand:'Vitall+', name:'Magnésium Marin', format:'60 gél.', price:32.0, cat:'complements', tag:'Conseil pharmacien'},
+    {id:'p3', brand:'Solgar', name:'Vitamine D3', format:'60 gél.', price:35.5, cat:'complements'},
+    {id:'d1', brand:'Elgydium', name:'Dentifrice Protection Caries', format:'75 ml', price:9.9, cat:'hygiene'},
+    {id:'d2', brand:'Klorane', name:'Dentifrice Bébé', format:'50 ml', price:8.5, cat:'hygiene'}
+  ];
+
+  const PALETTE = ['#1F4B43','#8FAE95','#E3A857','#C1443C'];
+  function colorFor(id){
+    let h = 0;
+    for (let i=0;i<id.length;i++) h = (h*31 + id.charCodeAt(i)) >>> 0;
+    return PALETTE[h % PALETTE.length];
+  }
+
+  function shapeSVG(shape, id, size){
+    const col = colorFor(id);
+    size = size || 64;
+    const common = `width="${size}" height="${size}" viewBox="0 0 64 64" fill="none"`;
+    switch(shape){
+      case 'jar':
+        return `<svg ${common}><rect x="16" y="24" width="32" height="30" rx="4" fill="${col}"/><rect x="20" y="14" width="24" height="12" rx="3" fill="${col}" opacity="0.55"/><rect x="24" y="32" width="16" height="3" fill="#fff" opacity="0.5"/></svg>`;
+      case 'jar-pills':
+        return `<svg ${common}><rect x="17" y="20" width="30" height="34" rx="5" fill="${col}" opacity="0.18" stroke="${col}" stroke-width="2"/><rect x="17" y="20" width="30" height="9" rx="3" fill="${col}"/><circle cx="27" cy="40" r="3.4" fill="${col}"/><circle cx="37" cy="36" r="3.4" fill="${col}" opacity="0.7"/><circle cx="34" cy="46" r="3.4" fill="${col}" opacity="0.5"/></svg>`;
+      case 'bottle':
+        return `<svg ${common}><rect x="20" y="10" width="10" height="8" rx="2" fill="${col}"/><path d="M18 18h14l3 6v26a3 3 0 0 1-3 3H18a3 3 0 0 1-3-3V24z" fill="${col}"/><rect x="16" y="30" width="18" height="3" fill="#fff" opacity="0.45"/></svg>`;
+      case 'bottle-cap':
+        return `<svg ${common}><rect x="22" y="8" width="10" height="7" rx="1.5" fill="${col}"/><rect x="17" y="15" width="20" height="8" rx="2" fill="${col}" opacity="0.7"/><path d="M15 23h24l2 6v20a3 3 0 0 1-3 3H16a3 3 0 0 1-3-3V29z" fill="${col}"/></svg>`;
+      case 'bottle-pump':
+        return `<svg ${common}><rect x="26" y="6" width="5" height="12" fill="${col}"/><circle cx="28.5" cy="6" r="3.5" fill="${col}"/><path d="M17 20h22l2 5v27a3 3 0 0 1-3 3H18a3 3 0 0 1-3-3V25z" fill="${col}"/><rect x="15" y="32" width="20" height="3" fill="#fff" opacity="0.45"/></svg>`;
+      case 'tube':
+      default:
+        return `<svg ${common}><path d="M24 10h16l3 8H21z" fill="${col}"/><rect x="19" y="18" width="26" height="32" rx="6" fill="${col}" opacity="0.85"/><rect x="19" y="18" width="26" height="8" fill="${col}"/></svg>`;
+    }
+  }
+
+  const shapeByCat = {};
+  CATS.forEach(c => shapeByCat[c.slug] = c.shape);
+  const labelByCat = {};
+  CATS.forEach(c => labelByCat[c.slug] = c.label);
+
+  // ---------- state ----------
+  const state = { cat:'all', price:'all', sort:'relevance', search:'', cart:{} };
+
+  // ---------- render filter checkboxes ----------
+  const filterCatsEl = document.getElementById('filterCats');
+  filterCatsEl.innerHTML = `<label class="filter-option active-radio" data-fc="all"><input type="radio" name="fcat" value="all" checked> Tous</label>` +
+    CATS.map(c => `<label class="filter-option" data-fc="${c.slug}"><input type="radio" name="fcat" value="${c.slug}"> ${c.label}</label>`).join('');
+
+  filterCatsEl.addEventListener('change', e => {
+    state.cat = e.target.value;
+    syncAisleChips();
+    syncFilterLabels();
+    renderGrid();
+  });
+
+  document.querySelectorAll('input[name="price"]').forEach(r => {
+    r.addEventListener('change', e => { state.price = e.target.value; renderGrid(); });
+  });
+
+  document.getElementById('sortSelect').addEventListener('change', e => { state.sort = e.target.value; renderGrid(); });
+  document.getElementById('searchInput').addEventListener('input', e => { state.search = e.target.value.trim().toLowerCase(); renderGrid(); });
+
+  document.getElementById('aisleRow').addEventListener('click', e => {
+    const chip = e.target.closest('.aisle-chip');
+    if (!chip) return;
+    state.cat = chip.dataset.cat;
+    syncAisleChips();
+    syncFilterLabels();
+    renderGrid();
+    document.getElementById('shop').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  function syncAisleChips(){
+    document.querySelectorAll('.aisle-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === state.cat));
+  }
+  function syncFilterLabels(){
+    document.querySelectorAll('#filterCats .filter-option').forEach(l => {
+      const match = l.dataset.fc === state.cat;
+      l.classList.toggle('active-radio', match);
+      l.querySelector('input').checked = match;
+    });
+  }
+
+  function priceMatch(p){
+    if (state.price === 'all') return true;
+    const [min,max] = state.price.split('-').map(Number);
+    return p >= min && p <= max;
+  }
+
+  function renderGrid(){
+    let list = PRODUCTS.filter(p => (state.cat === 'all' || p.cat === state.cat) && priceMatch(p.price) &&
+      (state.search === '' || (p.name+' '+p.brand).toLowerCase().includes(state.search)));
+
+    if (state.sort === 'price-asc') list = list.slice().sort((a,b)=>a.price-b.price);
+    else if (state.sort === 'price-desc') list = list.slice().sort((a,b)=>b.price-a.price);
+    else if (state.sort === 'name-asc') list = list.slice().sort((a,b)=>a.name.localeCompare(b.name));
+
+    document.getElementById('resultCount').textContent = list.length + (list.length>1 ? ' produits' : ' produit');
+
+    const grid = document.getElementById('productGrid');
+    if (list.length === 0){
+      grid.innerHTML = `<div class="empty-state">Aucun produit ne correspond à votre recherche.<br>Essayez un autre rayon ou un autre mot-clé.</div>`;
+      return;
+    }
+
+    grid.innerHTML = list.map(p => `
+      <article class="card" id="prod-${p.id}">
+        <div class="tear"><svg viewBox="0 0 200 9" preserveAspectRatio="none"><path d="M0,0 L5,9 L10,0 L15,9 L20,0 L25,9 L30,0 L35,9 L40,0 L45,9 L50,0 L55,9 L60,0 L65,9 L70,0 L75,9 L80,0 L85,9 L90,0 L95,9 L100,0 L105,9 L110,0 L115,9 L120,0 L125,9 L130,0 L135,9 L140,0 L145,9 L150,0 L155,9 L160,0 L165,9 L170,0 L175,9 L180,0 L185,9 L190,0 L195,9 L200,0 V9 H0 Z" fill="var(--sage-pale)"/></svg></div>
+        <div class="art">
+          ${p.tag ? `<span class="tag${p.tag==='Nouveau'?' alt':''}">${p.tag}</span>` : ''}
+          ${shapeSVG(shapeByCat[p.cat], p.id)}
+        </div>
+        <div class="body">
+          <span class="brand">${p.brand}</span>
+          <h4 class="name">${p.name}</h4>
+          <span class="format">${p.format} · ${labelByCat[p.cat]}</span>
+          <div class="bottom-row">
+            <span class="price">${p.price.toFixed(3)}<span class="cur">TND</span></span>
+            <button class="add-btn" data-id="${p.id}">Ajouter</button>
+          </div>
+        </div>
+      </article>
+    `).join('');
+
+    grid.querySelectorAll('.add-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        addToCart(btn.dataset.id);
+        btn.textContent = 'Ajouté ✓';
+        btn.classList.add('added');
+        setTimeout(()=>{ btn.textContent='Ajouter'; btn.classList.remove('added'); }, 900);
+      });
+    });
+  }
+
+  // ---------- cart ----------
+  function addToCart(id){
+    state.cart[id] = (state.cart[id] || 0) + 1;
+    renderCart();
+  }
+  function changeQty(id, delta){
+    if (!state.cart[id]) return;
+    state.cart[id] += delta;
+    if (state.cart[id] <= 0) delete state.cart[id];
+    renderCart();
+  }
+  function removeFromCart(id){
+    delete state.cart[id];
+    renderCart();
+  }
+
+  const FREE_SHIP_THRESHOLD = 80;
+
+  function renderCart(){
+    const ids = Object.keys(state.cart);
+    const countEl = document.getElementById('cartCount');
+    const totalItems = ids.reduce((s,id)=>s+state.cart[id],0);
+    countEl.textContent = totalItems;
+
+    const itemsEl = document.getElementById('cartItems');
+    const footEl = document.getElementById('cartFoot');
+
+    if (ids.length === 0){
+      itemsEl.innerHTML = `<div class="cart-empty">Votre panier est vide.<br>Ajoutez des produits depuis le catalogue.</div>`;
+      footEl.innerHTML = '';
+      return;
+    }
+
+    let subtotal = 0;
+    itemsEl.innerHTML = ids.map(id => {
+      const p = PRODUCTS.find(x=>x.id===id);
+      const qty = state.cart[id];
+      const lineTotal = p.price * qty;
+      subtotal += lineTotal;
+      return `
+        <div class="cart-item">
+          <div class="mini-art">${shapeSVG(shapeByCat[p.cat], p.id, 36)}</div>
+          <div class="info">
+            <div class="brand">${p.brand}</div>
+            <div class="name">${p.name} — ${p.format}</div>
+            <div class="qty-row">
+              <button class="qty-btn" data-act="dec" data-id="${id}" aria-label="Diminuer la quantité">−</button>
+              <span class="qty-val">${qty}</span>
+              <button class="qty-btn" data-act="inc" data-id="${id}" aria-label="Augmenter la quantité">+</button>
+            </div>
+            <button class="remove-x" data-id="${id}">Retirer</button>
+          </div>
+          <div class="line-price">${lineTotal.toFixed(3)}</div>
+        </div>
+      `;
+    }).join('');
+
+    itemsEl.querySelectorAll('.qty-btn').forEach(b => {
+      b.addEventListener('click', () => changeQty(b.dataset.id, b.dataset.act==='inc'?1:-1));
+    });
+    itemsEl.querySelectorAll('.remove-x').forEach(b => {
+      b.addEventListener('click', () => removeFromCart(b.dataset.id));
+    });
+
+    const remaining = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
+    const shipNote = remaining > 0
+      ? `Ajoutez ${remaining.toFixed(3)} TND pour la livraison gratuite.`
+      : `Livraison gratuite débloquée ✓`;
+
+    footEl.innerHTML = `
+      <div class="ship-note">${shipNote}</div>
+      <div class="totals-row"><span>Sous-total</span><span class="val">${subtotal.toFixed(3)} TND</span></div>
+      <div class="totals-row"><span>Livraison</span><span class="val">${remaining>0 ? '7.000 TND' : '0.000 TND'}</span></div>
+      <div class="totals-row total"><span>Total</span><span class="val">${(subtotal + (remaining>0?7:0)).toFixed(3)} TND</span></div>
+      <button class="checkout-btn" id="checkoutBtn">Passer la commande</button>
+      <button class="checkout-btn secondary-link" id="waCheckoutBtn">ou commander via WhatsApp</button>
+    `;
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      openCheckout();
+    });
+
+    document.getElementById('waCheckoutBtn').addEventListener('click', () => {
+      const lines = ids.map(id => {
+        const p = PRODUCTS.find(x=>x.id===id);
+        const qty = state.cart[id];
+        return `• ${p.brand} ${p.name} (${p.format}) x${qty} — ${(p.price*qty).toFixed(3)} TND`;
+      }).join('%0A');
+      const total = (subtotal + (remaining>0?7:0)).toFixed(3);
+      const msg = `Bonjour, je souhaite commander :%0A${lines}%0A%0ATotal : ${total} TND%0AMerci de me recontacter pour confirmer la livraison.`;
+      window.open(`https://wa.me/21694899247?text=${msg}`, '_blank');
+    });
+  }
+
+  function cartTotals(){
+    const ids = Object.keys(state.cart);
+    let subtotal = 0;
+    ids.forEach(id => { const p = PRODUCTS.find(x=>x.id===id); subtotal += p.price * state.cart[id]; });
+    const shipping = (subtotal >= FREE_SHIP_THRESHOLD || subtotal === 0) ? 0 : 7;
+    return { ids, subtotal, shipping, total: subtotal + shipping };
+  }
+
+  // ---------- drawer open/close ----------
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('overlay');
+  function openCart(){ drawer.classList.add('open'); overlay.classList.add('open'); }
+  function closeCart(){ drawer.classList.remove('open'); overlay.classList.remove('open'); }
+  document.getElementById('cartOpenBtn').addEventListener('click', openCart);
+  document.getElementById('cartCloseBtn').addEventListener('click', closeCart);
+  overlay.addEventListener('click', closeCart);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
+  // ---------- checkout ----------
+  const coOverlay = document.getElementById('coOverlay');
+  const coNext = document.getElementById('coNext');
+  const coBack = document.getElementById('coBack');
+  let coStep = 1;
+  let orderRef = null;
+
+  function openCheckout(){
+    if (Object.keys(state.cart).length === 0) return;
+    closeCart();
+    coStep = 1;
+    goToStep(1);
+    coOverlay.classList.add('open');
+  }
+  function closeCheckout(){ coOverlay.classList.remove('open'); }
+  document.getElementById('coCloseBtn').addEventListener('click', closeCheckout);
+  coOverlay.addEventListener('click', e => { if (e.target === coOverlay) closeCheckout(); });
+
+  function goToStep(n){
+    coStep = n;
+    document.querySelectorAll('.co-step').forEach(s => {
+      const sn = Number(s.dataset.step);
+      s.classList.toggle('active', sn===n);
+      s.classList.toggle('done', sn<n);
+    });
+    document.querySelectorAll('.co-panel').forEach(p => p.classList.toggle('active', Number(p.dataset.panel)===n));
+    coBack.style.visibility = 'hidden';
+    document.getElementById('coNav').style.display = n===2 ? 'none' : 'flex';
+    if (n === 1) renderStep1Summary();
+    coNext.textContent = 'Confirmer et envoyer sur WhatsApp';
+    coNext.disabled = false;
+    coNext.classList.remove('spinning');
+  }
+
+  function fieldError(id, hasError){
+    const el = document.getElementById(id);
+    el.classList.toggle('invalid', hasError);
+  }
+
+  function validateStep1(){
+    const name = document.getElementById('coName').value.trim();
+    const phone = document.getElementById('coPhone').value.trim();
+    const city = document.getElementById('coCity').value.trim();
+    const address = document.getElementById('coAddress').value.trim();
+    let ok = true;
+    fieldError('fName', name.length < 2); if (name.length<2) ok=false;
+    fieldError('fPhone', phone.replace(/\D/g,'').length < 7); if (phone.replace(/\D/g,'').length<7) ok=false;
+    fieldError('fCity', city.length < 2); if (city.length<2) ok=false;
+    fieldError('fAddress', address.length < 4); if (address.length<4) ok=false;
+    return ok;
+  }
+
+  function renderStep1Summary(){
+    const { subtotal, shipping, total } = cartTotals();
+    document.getElementById('coSummaryStep1').innerHTML = `
+      <div class="cs-row"><span>Sous-total</span><span class="val">${subtotal.toFixed(3)} TND</span></div>
+      <div class="cs-row"><span>Livraison</span><span class="val">${shipping.toFixed(3)} TND</span></div>
+      <div class="cs-row total"><span>Total</span><span class="val">${total.toFixed(3)} TND</span></div>
+    `;
+  }
+
+  function makeOrderId(){
+    if (!orderRef) orderRef = 'LCV-' + Math.floor(100000 + Math.random()*900000);
+    return orderRef;
+  }
+
+  coNext.addEventListener('click', () => {
+    if (!validateStep1()) return;
+    runConfirm();
+  });
+
+  function runConfirm(){
+    coNext.disabled = true;
+    coNext.classList.add('spinning');
+    coNext.innerHTML = `<span class="spinner"></span> Envoi sur WhatsApp…`;
+
+    // snapshot cart before it gets cleared, to build the WhatsApp recap
+    const snapshot = Object.keys(state.cart).map(id => {
+      const p = PRODUCTS.find(x=>x.id===id);
+      return { p, qty: state.cart[id] };
+    });
+
+    setTimeout(() => {
+      const id = showSuccess();
+      sendOrderToWhatsApp(id, snapshot);
+      goToStep(2);
+      state.cart = {};
+      renderCart();
+      orderRef = null;
+    }, 700);
+  }
+
+  function sendOrderToWhatsApp(orderId, snapshot){
+    const { total, shipping } = cartTotals();
+    const name = document.getElementById('coName').value.trim();
+    const phone = document.getElementById('coPhone').value.trim();
+    const city = document.getElementById('coCity').value.trim();
+    const address = document.getElementById('coAddress').value.trim();
+    const lines = snapshot.map(({p,qty}) => `• ${p.brand} ${p.name} (${p.format}) x${qty} — ${(p.price*qty).toFixed(3)} TND`).join('%0A');
+    const msg = `Nouvelle commande N° ${orderId}%0A%0A${lines}%0A%0ALivraison : ${shipping.toFixed(3)} TND%0ATotal : ${total.toFixed(3)} TND%0A%0AClient : ${name}%0ATél : ${phone}%0AAdresse : ${address}, ${city}`;
+    window.open(`https://wa.me/21694899247?text=${msg}`, '_blank');
+  }
+
+  function showSuccess(){
+    const { total } = cartTotals();
+    const id = makeOrderId();
+    document.getElementById('coSuccess').innerHTML = `
+      <div class="check-badge">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h4>Commande envoyée</h4>
+      <p>Merci ! Votre commande a été envoyée sur WhatsApp à notre équipe officinale, qui va vous recontacter pour confirmer la livraison et le paiement.</p>
+      <div class="order-id">N° ${id}</div>
+      <p style="margin-bottom:6px;"><b style="color:var(--ink)">Total : ${total.toFixed(3)} TND</b></p>
+      <button class="btn-primary" id="coCloseSuccess" style="margin-top:10px;">Continuer mes achats</button>
+    `;
+    document.getElementById('coCloseSuccess').addEventListener('click', closeCheckout);
+    return id;
+  }
+
+  // ---------- init ----------
+  renderGrid();
+  renderCart();
+})();
+</script>
+
+</body>
+</html>
